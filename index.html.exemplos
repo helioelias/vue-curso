@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My Books</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="node_modules/font-awesome/css/font-awesome.css" />
+    <script src="node_modules/vue/dist/vue.js"></script>
+    <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
+</head>
+<body>
+    
+<div class="container" id="hello">
+
+    <div class="row">   
+        <h1>{{ msg }}</h1>
+        <input type="text" class="form-control" v-model="msg">
+    </div>
+
+    <div class="row">   
+        <h1>My List</h1>
+        <ul>
+            <li v-for="people in peoples">{{ people }}</li>
+        </ul>
+    </div>
+
+    <div class="row">        
+        <h1>My List Elements</h1>
+        <input type="text" v-model="newElement" class="form-control" v-on:keyup.enter="addElement">
+        <ul>
+            <li v-for="(element, $index) in elements">
+                {{ element.title }}
+                <a href="#" v-on:click="removeElement($event, $index)">X</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <h1>v-on</h1>
+        <button type="button" v-on:click="myClick">Click</button>
+        <button type="button" @click="myClick">@Click</button>
+        <input type="text" @keyup="myKeyUp" placeholder="myKeyUp">
+        <input type="text" @keyup.enter="myKeyUp" placeholder="myKeyUp.Enter">
+        <input type="text" @keyup.13="myKeyUp" placeholder="myKeyUp.13">
+    </div>
+
+    <div class="row">
+        <h1>v-bind</h1>
+        <p v-bind:class="{ 'text-danger': 2 === 1, 'text-info': true }">text</p>
+        <p :class="{ 'text-danger': 1 === 1, 'text-info': false }">:text</p>
+        <p :style="{ fontSize:30 + 'px' }">Style</p>
+        <p :style="{ 'font-size':30 + 'px' }">Style</p>
+        <p :style="[objectA, objectB]">Object A and B</p>
+        <p v-bind="{ id: 1===1, name: true }">bind attribute</p>
+    </div>
+    <div class="row">
+        <h1>v-model</h1>
+        <ul>
+            <li v-for="myList in myListForm">
+                {{ myList.name }} - {{ myList.email}}
+            </li>
+        </ul>
+        <input type="text" v-model="myForm.name" placeholder="Name">
+        <input type="text" v-model="myForm.email" placeholder="Email">
+        <button @click="addForm">Add</button>
+    </div>
+
+</div>
+
+<script src="js/app.js"></script>
+
+
+</body>
+</html>
